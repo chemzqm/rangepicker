@@ -1,6 +1,7 @@
 
 .datepicker-calendar {
   font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  display: inline-block;
 }
 
 .datepicker-popover .tip-arrow {

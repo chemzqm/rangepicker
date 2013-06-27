@@ -5,6 +5,8 @@
   "version": "1.0.0",
   "keywords": ["date", "picker", "calendar"],
   "dependencies": {
+    "component/emitter": "1.0.0",
+    "component/jquery": "*",
     "chemzqm/calendar": "*",
     "component/popover": "*",
     "component/aurora": "*",
@@ -13,7 +15,8 @@
   "development": {},
   "license": "MIT",
   "scripts": [
-    "index.js"
+    "index.js",
+    "template.js"
   ],
   "styles": [
     "datepicker.css"

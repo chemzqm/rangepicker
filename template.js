@@ -1,0 +1,1 @@
+module.exports = '<div class="rangepicker-content">\n  <div class="rangepicker-body"></div>\n  <button class="ok main">确定</button>\n  <button class="cancel">取消</button>\n</div>\n';

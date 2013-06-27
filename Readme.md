@@ -1,4 +1,4 @@
-# datepicker
+# Rangepicker
 
   Example date picker ui component built on component/calendar.
   

@@ -1,6 +1,9 @@
 
-build: components index.js datepicker.css
+build: components template.js index.js datepicker.css
 	@component build --dev
+
+template.js: template.html
+	@component convert $<
 
 components: component.json
 	@component install --dev
