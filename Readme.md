@@ -9,7 +9,7 @@
 
 ## Installation
 
-    $ component install component/datepicker
+    $ component install chemzqm/rangepicker
 
 ## License
 
