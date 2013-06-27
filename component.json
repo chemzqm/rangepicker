@@ -1,0 +1,21 @@
+{
+  "name": "rangepicker",
+  "repo": "chemzqm/rangepicker",
+  "description": "Date range picker ui component built on chemzqm/calendar",
+  "version": "1.0.0",
+  "keywords": ["date", "picker", "calendar"],
+  "dependencies": {
+    "chemzqm/calendar": "*",
+    "component/popover": "*",
+    "component/aurora": "*",
+    "component/event": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "scripts": [
+    "index.js"
+  ],
+  "styles": [
+    "datepicker.css"
+  ]
+}
