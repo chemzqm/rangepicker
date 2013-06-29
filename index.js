@@ -4,17 +4,10 @@
  */
 
 var Calendar = require('calendar')
-  , Popover = require('popover')
+  , Tip = require('tip')
   , Emitter = require('emitter')
   , event = require('event')
   , o = require('jquery');
-  
-
-/**
- * Expose `Rangepicker`.
- */
-
-module.exports = Rangepicker;
 
 function initCalendar () {
   var cal = new Calendar();
@@ -23,7 +16,7 @@ function initCalendar () {
   var to = d.getFullYear();
   var from = to - 20;
   cal.showYearSelect(from, to);
-  cal.el.addClass('datepicker-calendar');
+  cal.el.addClass('rangepicker-calendar');
   return cal;
 }
 
@@ -35,14 +28,13 @@ function initCalendar () {
  */
 
 function Rangepicker(el) {
-  if (!(this instanceof Rangepicker)) return new Rangepicker(el);
-  this.actions = o(require('./template'));
-  this.actions.find('.cancel').click(this.oncancel.bind(this));
-  this.actions.find('.ok').click(this.onok.bind(this));
-  this.el = el;
+  if (!(this instanceof Rangepicker)){ return new Rangepicker(el); }
+  this.body = o(require('./template'));
+  this.trigger = el;
   this.fromCal = initCalendar();
   this.toCal = initCalendar();
-  event.bind(el, 'click', this.onclick.bind(this));
+  this._onclick = this.onclick.bind(this);
+  event.bind(el, 'click', this._onclick);
 }
 
 /**
@@ -52,49 +44,90 @@ function Rangepicker(el) {
 Emitter(Rangepicker.prototype);
 
 /**
+ * Destory the picker element
+ */
+
+Rangepicker.prototype.remove = function() {
+  event.unbind(this.trigger, 'click', this._onclick);
+  o(this.trigger).remove();
+};
+
+/**
  * Handle input clicks.
  */
 
 Rangepicker.prototype.onclick = function(e){
-  if (this.popover) return;
-  var body = this.actions.find('.rangepicker-body');
-  body.append(this.fromCal.el);
-  body.append(this.toCal.el);
+  if (this.tip) return;
+  var b = this.body.find('.rangepicker-body');
+  b.append(this.fromCal.el);
+  b.append(this.toCal.el);
   var dates = this.getValue();
   if (dates && dates.length === 2) {
     this.fromCal.select(new Date(dates[0]));
     this.toCal.select(new Date(dates[1]));
   }
-  this.popover = new Popover(this.actions);
-  this.popover.position('north', {
+  this.tip = new Tip(this.body, {
+    delay: 300
+  });
+  this.tip.position('east', {
       auto: false
     })
-  this.popover.classname = 'datepicker-popover popover';
-  this.popover.show(this.el);
+  this.tip.classname = 'rangepicker-tip tip';
+  this.tip.show(this.trigger);
+  this._oncancel = this.oncancel.bind(this);
+  this._onok = this.onok.bind(this);
+  this._ondocumentclick = this.ondocumentclick.bind(this);
+  this._onkeydown = this.onkeydown.bind(this);
+  o(document).on('click', this._ondocumentclick);
+  o(document).on('keydown', this._onkeydown);
+  this.body.find('.cancel').on('click', this._oncancel);
+  this.body.find('.ok').on('click', this._onok);
 };
+
+Rangepicker.prototype.onkeydown = function(e) {
+  if (e.keyCode === 27){
+    this.oncancel();
+  }
+}
+
+Rangepicker.prototype.ondocumentclick = function(e) {
+  var target = o(e.target);
+  if (o(e.target).parents('.rangepicker-tip').addBack().hasClass('rangepicker-tip')) {
+    return;
+  }
+  if (o(e.target).is(this.trigger)) {
+    return;
+  }
+  this.oncancel();
+}
 
 Rangepicker.prototype.onok = function(e){
   var fd = this.fromCal.getDateString();
   var td = this.toCal.getDateString();
   var revert = this.fromCal._date.getTime() > this.toCal._date.getTime()? true:false;
   if (revert) {
-    this.el.value = td + '-' + fd;
+    this.trigger.value = td + '-' + fd;
   } else {
-    this.el.value = fd + '-' + td;
+    this.trigger.value = fd + '-' + td;
   }
   var value = this.getValue();
   this.emit('change', value);
-  this.popover.remove();
-  this.popover = null;
+  this.oncancel();
 };
 
-Rangepicker.prototype.oncancel = function(e){
-  this.popover.remove();
-  this.popover = null;
+Rangepicker.prototype.oncancel = function(){
+  if (this.tip) {
+    o(document).off('click', this._ondocumentclick);
+    o(document).off('keydown', this._onkeydown);
+    this.body.find('.cancel').off('click', this._oncancel);
+    this.body.find('.ok').off('click', this._onok);
+    this.tip.remove();
+    this.tip = null;
+  }
 };
 
 Rangepicker.prototype.getValue = function() {
-  var str = this.el.value;
+  var str = this.trigger.value;
   var res = [];
   var ds = str.split('-');
   var start_date;
@@ -105,3 +138,9 @@ Rangepicker.prototype.getValue = function() {
   },this);
   return res;
 }
+
+/**
+ * Expose `Rangepicker`.
+ */
+
+module.exports = Rangepicker;

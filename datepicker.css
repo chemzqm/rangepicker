@@ -1,13 +1,38 @@
+.rangepicker-tip .tip-inner {
+  background-color: #FFF;
+  color: inherit;
+}
 
-.datepicker-calendar {
+.rangepicker-tip .tip-arrow {
+  right: 10px;
+}
+
+.rangepicker-calendar {
   font: 10px "Helvetica Neue", Helvetica, Arial, sans-serif;
   display: inline-block;
 }
 
-.datepicker-popover .tip-arrow {
-  top: auto;
+.rangepicker-content {
+  height: 256px;
+  border: 2px solid #1c1c1c;
+  overflow: hidden;
 }
 
-.datepicker-popover .tip-inner {
-  border: none;
+.rangepicker-content > div {
+  float: left;
+}
+
+.rangepicker-content .rangepicker-actions {
+  height: 100%;
+  border-left: 1px solid #eee;
+  background: #fafafa;
+  box-shadow: inset 0 1px 0 white;
+}
+
+.rangepicker-content .rangepicker-actions button.ok {
+  margin-top: 100px;
+}
+.rangepicker-content .rangepicker-actions button {
+  display: block;
+  margin: 10px 10px 0px;
 }
