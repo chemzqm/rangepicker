@@ -1,6 +1,9 @@
 .rangepicker-tip .tip-inner {
-  background-color: #FFF;
   color: inherit;
+}
+
+.rangepicker-tip .rangepicker-content {
+  background-color: #FFF;
 }
 
 .rangepicker-tip .tip-arrow {
