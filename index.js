@@ -105,18 +105,3 @@ Rangepicker.prototype.getValue = function() {
   },this);
   return res;
 }
-/**
- * Handle date changes.
- */
-
-Rangepicker.prototype.onchange = function(date){
-  this.el.value = date.getFullYear()
-    + '/'
-    + date.getMonth()
-    + '/'
-    + date.getDate();
-
-  this.popover.remove();
-  this.popover = null;
-};
-
