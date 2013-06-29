@@ -13,7 +13,6 @@
 }
 
 .rangepicker-content {
-  height: 256px;
   border: 2px solid #1c1c1c;
   overflow: hidden;
 }
@@ -23,16 +22,22 @@
 }
 
 .rangepicker-content .rangepicker-actions {
-  height: 100%;
   border-left: 1px solid #eee;
   background: #fafafa;
   box-shadow: inset 0 1px 0 white;
+  position: relative;
+  width: 75px;
 }
 
-.rangepicker-content .rangepicker-actions button.ok {
-  margin-top: 100px;
+.rangepicker-content .rangepicker-actions .middle{
+  position: absolute;
+  padding: 0 10px;
+  padding: 0 10px;
+  top: 50%;
+  margin-top: -50%;
 }
+
 .rangepicker-content .rangepicker-actions button {
   display: block;
-  margin: 10px 10px 0px;
+  margin: 10px 0;
 }

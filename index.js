@@ -74,6 +74,8 @@ Rangepicker.prototype.onclick = function(e){
     })
   this.tip.classname = 'rangepicker-tip tip';
   this.tip.show(this.trigger);
+  var h = this.body.find('.rangepicker-body').height();
+  this.body.find('.rangepicker-actions').height(h);
   this._oncancel = this.oncancel.bind(this);
   this._onok = this.onok.bind(this);
   this._ondocumentclick = this.ondocumentclick.bind(this);
