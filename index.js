@@ -48,6 +48,7 @@ Emitter(Rangepicker.prototype);
  */
 
 Rangepicker.prototype.remove = function() {
+  this.off();
   event.unbind(this.trigger, 'click', this._onclick);
   o(this.trigger).remove();
 };
