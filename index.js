@@ -130,15 +130,20 @@ Rangepicker.prototype.oncancel = function(){
 
 Rangepicker.prototype.getValue = function() {
   var str = this.trigger.value;
-  var res = [];
+  var res = {};
   var ds = str.split('-');
-  var start_date;
-  var end_date;
-  ds.forEach(function(v, i) {
-    var ms = v.match(/(\d{4}).(\d{1,2}).(\d{1,2})/);
-    if (ms) { res.push(ms[1] + '-' + ms[2] + '-' + ms[3]); }
+  ['start', 'end'].forEach(function(v, i) {
+    var ms = ds[i].match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
+    if (ms) {
+      var val =ms[1] + '-' + ms[2] + '-' + ms[3];
+      res[v] = val;
+    }
   },this);
   return res;
+};
+
+Rangepicker.prototype.setValue = function(string) {
+  this.trigger.value = string;
 }
 
 /**
