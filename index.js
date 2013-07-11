@@ -107,13 +107,13 @@ Rangepicker.prototype.onok = function(e){
   var fd = this.fromCal.getDateString();
   var td = this.toCal.getDateString();
   var revert = this.fromCal._date.getTime() > this.toCal._date.getTime()? true:false;
+  var val;
   if (revert) {
-    this.trigger.value = td + '-' + fd;
+    val = td + '-' + fd;
   } else {
-    this.trigger.value = fd + '-' + td;
+    val = fd + '-' + td;
   }
-  var value = this.getValue();
-  this.emit('change', value);
+  this.setValue(val);
   this.oncancel();
 };
 
@@ -144,6 +144,11 @@ Rangepicker.prototype.getValue = function() {
 
 Rangepicker.prototype.setValue = function(string) {
   this.trigger.value = string;
+  var v = this.getValue();
+  if (string !== this._value) {
+    this.emit('change', v);
+  }
+  this._value = string;
 }
 
 /**
