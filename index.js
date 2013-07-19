@@ -63,9 +63,9 @@ Rangepicker.prototype.onclick = function(e){
   b.append(this.fromCal.el);
   b.append(this.toCal.el);
   var dates = this.getValue();
-  if (dates && dates.length === 2) {
-    this.fromCal.select(new Date(dates[0]));
-    this.toCal.select(new Date(dates[1]));
+  if (dates) {
+    this.fromCal.select(new Date(dates['start']));
+    this.toCal.select(new Date(dates['end']));
   }
   this.tip = new Tip(this.body, {
     delay: 300
