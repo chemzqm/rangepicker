@@ -13,6 +13,7 @@
   </head>
   <body>
     <input type="text" name="date" placeholder="Choose a date">
+    <input type="hidden" name="date1" placeholder="Choose a date">
     <script>
       var picker = require('rangepicker');
       var el = document.querySelector('[name=date]');
@@ -23,6 +24,14 @@
       p.on('change', function(v){
           console.log(v);
       });
+      var $ =require('jquery');
+      var date1 = $('[name="date1"]');
+      date1.on('change', function(){
+          console.log('changed');
+      });
+      var els = $(':input');
+      console.log(els[0].getAttribute('name'));
+      console.log(els);
     </script>
   </body>
 </html>

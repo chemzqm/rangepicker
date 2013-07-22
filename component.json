@@ -2,7 +2,7 @@
   "name": "rangepicker",
   "repo": "chemzqm/rangepicker",
   "description": "Date range picker ui component built on chemzqm/calendar",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "keywords": [
     "date",
     "picker",
