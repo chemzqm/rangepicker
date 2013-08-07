@@ -110,9 +110,9 @@ Rangepicker.prototype.onok = function(e){
   var revert = this.fromCal._date.getTime() > this.toCal._date.getTime()? true:false;
   var val;
   if (revert) {
-    val = td + '-' + fd;
+    val = td + ' - ' + fd;
   } else {
-    val = fd + '-' + td;
+    val = fd + ' - ' + td;
   }
   this.setValue(val);
   this.oncancel();
@@ -132,7 +132,7 @@ Rangepicker.prototype.oncancel = function(){
 Rangepicker.prototype.getValue = function() {
   var str = this.trigger.value;
   var res = {};
-  var ds = str.split('-');
+  var ds = str.split(' - ');
   ['start', 'end'].forEach(function(v, i) {
     var ms = ds[i].match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
     if (ms) {

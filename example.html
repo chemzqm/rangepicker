@@ -18,7 +18,7 @@
       var picker = require('rangepicker');
       var el = document.querySelector('[name=date]');
       var p = picker(el);
-      p.setValue('2012.1.1-2013.1.1');
+      p.setValue('2012.1.1 - 2013.1.1');
       var val = p.getValue();
       console.log(val);
       p.on('change', function(v){
