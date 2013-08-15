@@ -16,9 +16,6 @@
     <input type="hidden" name="date1" placeholder="Choose a date">
     <script>
       var picker = require('rangepicker');
-      var Calendar = require('calendar');
-      var one = new Calendar().showMonthSelect().showYearSelect();
-      one.el.appendTo('body');
 
       var el = document.querySelector('[name=date]');
       var p = picker(el);
