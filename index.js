@@ -129,6 +129,10 @@ Rangepicker.prototype.oncancel = function(){
   }
 };
 
+function pad (s) {
+  return s.length === 1? '0' + s : s;
+}
+
 Rangepicker.prototype.getValue = function() {
   var str = this.trigger.value;
   var res = {};
@@ -136,7 +140,7 @@ Rangepicker.prototype.getValue = function() {
   ['start', 'end'].forEach(function(v, i) {
     var ms = ds[i].match(/(\d{4})\.(\d{1,2})\.(\d{1,2})/);
     if (ms) {
-      var val =ms[1] + '-' + ms[2] + '-' + ms[3];
+      var val =ms[1] + '-' + pad(ms[2]) + '-' + pad(ms[3]);
       res[v] = val;
     }
   },this);
